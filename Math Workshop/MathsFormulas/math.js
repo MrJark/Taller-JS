@@ -94,3 +94,5 @@ function cicleCalcs (radio) {
 };
 
 console.groupEnd('Circle');
+
+//Cálculos de porcentajes (útil para calcular los descuentos)
