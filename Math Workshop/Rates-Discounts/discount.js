@@ -7,7 +7,9 @@ const priceResult = document.querySelector('#result');
 
 btn.addEventListener('click', calculatePriceDiscount );
 
-// first and second metod: function calculatePriceDiscount () {
+//Diferentes métodos para el cálculo
+
+// first metod: function calculatePriceDiscount () {
 //     // Formula -> (Price * (100 - Discount)) / 100;
 
 //     const price = Number(inputPrice.value); //colocar number es para obligar a que sea un número lo que escriban
@@ -72,15 +74,39 @@ btn.addEventListener('click', calculatePriceDiscount );
 
 //Otra manera de hacerlo pero con código mucho más limpio. Con solo uno o dos if y con arrays y objetos
 
-//Otra manera de hacerlo pero con código mucho más limpio. Con solo uno o dos if y con arrays y objetos
+//Otra manera de hacerlo pero con código mucho más limpio. Con solo uno o dos if y con arrays
 
-const couponObj = {
-    'Manolo-Cabeza-Bolo': 15,
-    'Patatas-traigo': 30,
-    'Pos-ya-estaría': 5,
-}
+// const couponObj = {
+//     'Manolo-Cabeza-Bolo': 15,
+//     'Patatas-traigo': 30,
+//     'Pos-ya-estaría': 5,
+// }
+// function calculatePriceDiscount () {
+//     // Formula -> (Price * (100 - Discount)) / 100;
+    
+//     const price = Number(inputPrice.value); //colocar number es para obligar a que sea un número lo que escriban
+//     const coupon = inputCoupon.value; //es un string
 
-//Esta sería otra manera de trabajar, y seguramente sea la más indicada y como se trabaja en el back-end. Ya que es un poco más larga que solo con arrays pero podemos tener más información de cada cupón
+//     if ( !price || !coupon ) {
+//         priceResult.innerHTML = 'Escribe el precio y el descuento antes, por favor 🔪'
+//         return;
+//     }
+
+//     let discount;
+
+//     if (couponObj[coupon]) {
+//         discount = couponObj[coupon];
+//     }else {
+//         priceResult.innerHTML =`El cupon no es válido, lo siento. Tu precio es $${inputPrice.value}`
+//         return;
+//     }
+
+//     const newPrice = (price * (100 - discount)) / 100;
+
+//     priceResult.innerHTML = `El precio con el descuento es $ ${newPrice}`;
+// };
+
+//Esta sería otra manera de trabajar, y seguramente sea la más indicada y como se trabaja en el back-end, ya que es un poco más larga que solo con arrays pero podemos tener más información de cada cupón
 
 const couponsList = [];
 couponsList.push({
@@ -91,12 +117,16 @@ couponsList.push({
     name: 'Patatas-traigo',
     discount: 30,
 });
+couponsList.push({
+    name: 'Alcachofas-con-tomaco',
+    discount: 80,
+});
 
 function calculatePriceDiscount () {
     // Formula -> (Price * (100 - Discount)) / 100;
     
     const price = Number(inputPrice.value); //colocar number es para obligar a que sea un número lo que escriban
-    const coupon = inputCoupon.value; //es un string
+    const coupon = inputCoupon.value; //es un string por eso no lleva el NUmber
 
     if ( !price || !coupon ) {
         priceResult.innerHTML = 'Escribe el precio y el descuento antes, por favor 🔪'
@@ -105,10 +135,25 @@ function calculatePriceDiscount () {
 
     let discount;
 
-    if (couponObj[coupon]) {
-        discount = couponObj[coupon];
+    function isCouponInArray (couponElement) {
+        return couponElement.name == coupon;
+    };
+
+    const couponInArray = couponsList.find(isCouponInArray);
+    
+    //al aplicar el método find y no filter, nos devuelve un objeto, en este caso el primero que coincida con lo que la persona ha escrito.
+    //Si usáramos el método .filter, tendríamos que poner lo siguiente
+    // if (couponInArray.lenght > 0) {
+    //     discount = couponInArray[0].discount;
+    // }else {
+    //     priceResult.innerHTML =`El cupon no es válido, lo siento. Tu precio sigue siendo de $${inputPrice.value}`
+    //     return;
+    // };
+
+    if (couponInArray) {
+        discount = couponInArray.discount;
     }else {
-        priceResult.innerHTML =`El cupon no es válido, lo siento. Tu precio es $${inputPrice.value}`
+        priceResult.innerHTML =`El cupon no es válido, lo siento. Tu precio sigue siendo de $${inputPrice.value}`
         return;
     }
 
