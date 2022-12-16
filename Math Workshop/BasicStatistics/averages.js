@@ -25,9 +25,14 @@ function averageCalc (list)  {
     function addAllElements (valorAcumulado, nuevoValor) {
         return valorAcumulado + nuevoValor;
     };
-    
     const sumList = list.reduce(addAllElements);
+
+    // las anteriores 3 lineas de código se pueden resumir o acortar con unas arrow functions como :
+    // const sumList = list.reduce((valorAcumulado, nuevoValor) => valorAcumulado + nuevoValor);
+    
     const average = sumList / list.length;
     console.log(average);
     return average;
 };
+
+
