@@ -25,7 +25,8 @@ function medianCalc {
     const parList = esPar(list);
 
     if (parList) {
-        // ...
+        
+
     } else {
         const indiceMedianaListaImpar = Math.floor (list.length / 2);
         //esta const me da el número que está en el centro de la lista sin los decimales ya que es lo que hace el método .floor() de Math y nos redondea hacia abajo
