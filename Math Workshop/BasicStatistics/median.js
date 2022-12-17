@@ -19,9 +19,11 @@ function esImpar (list) {
     return (list.length % 2);
 };
 
-//Vamos a calcular la mediana. Es el elemento que está en el centro de la lista, el valor que está en medio, Si la lista es imoar, será el que esté justo en medio pero si es par, dara el promedio de los dos que se encuentre en medio
+//Vamos a calcular la mediana. Es el elemento que está en el centro de la lista, el valor que está en medio, Si la lista es impar, será el que esté justo en medio pero si es par, dara el promedio de los dos que se encuentre en la mitad, la mitad por arriba y la mitad por abajo
+function medianCalc (unorderList) {
 
-function medianCalc (list) {
+    const list = sortedList(unorderList);// esto es para que la lista desordenada se ordene y funione como debe
+
     const parList = esPar(list);
 
     if (parList) {
@@ -65,4 +67,35 @@ function averageCalc (list)  {
     const average = sumList / list.length;
     console.log(average);
     return average;
+};
+
+//parte para ordenar una lista desordenada
+function sortedList (unsortedList) {
+    function sortUnsortedList (valorAcumulado, nuevoValor) {
+        //debemos decir el criterio con el que queremos ordenar la lista. De mayor a menor, al reves, si es un string, por ordel alfabético...
+        //Forma 1. Más larga y compleja
+
+        // if(valorAcumulado > nuevoValor) {
+        //     return 1;
+        // } else if (valorAcumulado == nuevoValor) {
+        //     return 0;
+        // } else if (valorAcumulado < nuevoValor) {
+        //     return -1;
+        // };
+
+        //con este condicional lo que hacemos es ordenar nuestra lista de menor a mayor. Los returns con numeros positivos negativos y el cero es por el método .sort() el cual si le devolvemos un valor postivo >= 1, hará el flip y si le devolvemos un valor <= 0 dejará los numeros como están y pasará al siguiente de la lista.
+        //Y si queremos ordenar la lista de mayor a menos, simplemente tendremos que cambiar el 1 por el -1 y nos la ordenará al revés
+
+        //Forma 2, más rápida y limpia
+
+        return valorAcumulado - nuevoValor; //y ya está
+
+        // esto me devuelve un numero positivo, negativo o cero y por tanto con   .sort() lo ordena dependiendo lo que de y como lo queramos, en este caso la ordena de menor a mayor y su ponemos nuevoValor - valorAcumulado, nos la ordenará de mayor a menor
+    };
+
+    const list = unsortedList.sort(sortUnsortedList);
+    //y otra manera mucho más fácil y limpia es con las arrow functions
+    // const list = unsortedLis.sort((a,b) => a - b);
+
+    return list;
 };
