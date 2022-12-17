@@ -3,7 +3,7 @@
 //La moda es la el número (o string) que más se repite
 
 function modeCalc (list) {
-    const countList = ();
+    const countList = {};
 
     for (let i = 0; i < list.length; i++){
         const element = list[i]; //element es el nº o string que aparece en nuestra lista
@@ -15,4 +15,7 @@ function modeCalc (list) {
         };
         //es un condicional par que me los pueda ir contando
     };
+
+    const arrayList = Object.entries(countList);
+    console.log({countList, arrayList});
 };
