@@ -21,11 +21,25 @@ function esImpar (list) {
 
 //Vamos a calcular la mediana. Es el elemento que está en el centro de la lista, el valor que está en medio, Si la lista es imoar, será el que esté justo en medio pero si es par, dara el promedio de los dos que se encuentre en medio
 
-function medianCalc {
+function medianCalc (list) {
     const parList = esPar(list);
 
     if (parList) {
-        
+        const indexMitad1ListaPar = (list.length / 2) - 1;
+        const indexMitad2ListaPar = (list.length / 2);
+
+        //Forma 1
+        //con esto calculamos el promedio de la lista ya que cogería la mitad por abajo y la mitad por arriba, los sumaría y los dividiría entre 2
+        // averageCalc([list[indexMitad1ListaPar], [indexMitad2ListaPar]]);
+
+        //Forma 2 y más limpia de hacerlo
+        const halvesLists = [];
+        halvesLists.push(list[indexMitad1ListaPar]);
+        halvesLists.push(list[indexMitad2ListaPar]);
+
+        const medianHalves = averageCalc(halvesLists);
+        return medianHalves;
+        //de esta sengunda manera lo que hacemos es tener una lista de mitades vacia y le hacemos .push de la mitad superior e inferior. Y a esa lista hacemos el averageCalc manteniendo las constantes indexMitad1ListaPar y indexMitad2ListaPar
 
     } else {
         const indiceMedianaListaImpar = Math.floor (list.length / 2);
@@ -35,4 +49,20 @@ function medianCalc {
         //en esa const tenemos la mediana en la constante guardada
         return medianaListImpar;
     };
+};
+
+//parte del average
+function averageCalc (list)  {
+    
+    function addAllElements (valorAcumulado, nuevoValor) {
+        return valorAcumulado + nuevoValor;
+    };
+    const sumList = list.reduce(addAllElements);
+
+    // las anteriores 3 lineas de código se pueden resumir o acortar con unas arrow functions como :
+    // const sumList = list.reduce((valorAcumulado, nuevoValor) => valorAcumulado + nuevoValor);
+    
+    const average = sumList / list.length;
+    console.log(average);
+    return average;
 };
