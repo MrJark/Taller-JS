@@ -27,9 +27,9 @@ AllFunctions.averageCalc = function averageCalc (list)  {
 //Vamos a calcular la mediana. Es el elemento que está en el centro de la lista, el valor que está en medio, Si la lista es impar, será el que esté justo en medio pero si es par, dara el promedio de los dos que se encuentre en la mitad, la mitad por arriba y la mitad por abajo
 AllFunctions.medianCalc = function medianCalc (unorderList) {
 
-    const list = sortedList(unorderList);// esto es para que la lista desordenada se ordene y funione como debe
+    const list = AllFunctions.sortedList(unorderList);// esto es para que la lista desordenada se ordene y funione como debe
 
-    const parList = esPar(list);
+    const parList = AllFunctions.esPar(list);
 
     if (parList) {
         const indexMitad1ListaPar = (list.length / 2) - 1;
@@ -44,7 +44,7 @@ AllFunctions.medianCalc = function medianCalc (unorderList) {
         halvesLists.push(list[indexMitad1ListaPar]);
         halvesLists.push(list[indexMitad2ListaPar]);
 
-        const medianHalves = averageCalc(halvesLists);
+        const medianHalves = AllFunctions.averageCalc(halvesLists);
         return medianHalves;
         //de esta sengunda manera lo que hacemos es tener una lista de mitades vacia y le hacemos .push de la mitad superior e inferior. Y a esa lista hacemos el averageCalc manteniendo las constantes indexMitad1ListaPar y indexMitad2ListaPar
 
@@ -57,7 +57,6 @@ AllFunctions.medianCalc = function medianCalc (unorderList) {
         return medianaListImpar;
     };
 };
-
 //parte del average
 AllFunctions.averageCalc = function averageCalc (list)  {
     
