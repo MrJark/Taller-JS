@@ -61,5 +61,3 @@ function sortedBidimensionalList (unsortedList, i) { //con los dos parámetros q
 //     })
 //     return out;
 // };
-
-//
