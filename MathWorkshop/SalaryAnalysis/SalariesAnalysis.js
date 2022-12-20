@@ -132,7 +132,11 @@ function proyeccionPorEmpresa (nombreEmpresa) {
 //Análisis general
 function medianaGeneral() {
     //tenemos que crear un arreglo de nombres de personas para a partir de esos nombres de personas, hacer llamados a la funcion medianaPorPersona para que nos de sus medianas, crear un array y a partir de ahí, hacer la mediana global
-    const nombres = salarios.map(persona => persona.name); //con esta llamamos a todas las personas del arreglo salarios con la propiedad .map()
+    const listaMedianas = salarios.map(
+        persona => medianaPorPersona(persona.name)
+    ); //con esta llamamos a todas las personas del arreglo salarios con la propiedad .map() y hacemos a su vez que nos de la mediana por persona a través del nombre y con esto nos ahorramos la constante medianaDePersonas de abajo
+    // const medianaDePersonas = nombres.map(nombre => medianaPorPersona(nombre));
     
-
-}
+    const medianaDeTodos = AllFunctions.medianCalc(listaMedianas);
+    return medianaDeTodos;
+};
