@@ -58,3 +58,29 @@ function proyeccionPorPersona (nombrePersona) {
     return `El nuevo salario es de $${nuevoSalario}`;
 };
 
+//Análisis empresarial.
+//Tengo que hacer el análisis por empresas que tenemos (incluido el freelancer) y dentro de cada una ver los años en los que han estado y los sueldos cada año para poder estimar, por ejemplo, cuanto cada empresa se puede gartar los años futuros en sueldos o cuando van a ganar las personas por cada empresa en la que estén o cuanto a aumentado el sueldo a lo largo de los años
+
+//DEBEMOS TENER CUIDADO CON LOS NOMBRES PORQUE EN SALARIES.JS HAY NOMBRES MUY PARECIDOS A LOS QUE VAMOS A PONER EN ESTAS FUNCIONES. 
+//SINTAXIS MUY CIMPORTANTE
+
+const empresas = {};
+
+// las primeras palabras del los ciclos for, persona y trabajo, es lo que vamos a crear en nuestro objeto empresas 
+for (persona of salarios) { //esto es para recorrer el arreglo de salarios
+    for (trabajo of persona.trabajos){ //para recorrer el arreglo de trabajos y dentro de esto tenemos trabajo.year trabajo.empresa trabajo.salario y tendremos que sacar esa información
+        if (!empresas[trabajo.empresa]) { //esto quiere decir: si no existe dentro de mi objeto empresas un objeto que venga del file salaries.js que tenga la propiedad trabajo.empresa, lo cree dentro de empresas y que sea un objeto
+            empresas[trabajo.empresa] = {};
+        }
+        //si sí existe, pasamos al siguiente if
+        //este if nos dice que, si no existe dentro de empresas un trabajo.empresa y que a su vez tenga un trabajo.year, lo cree y sea un array
+        if (!empresas[trabajo.empresa][trabajo.year]) {
+            empresas[trabajo.empresa][trabajo.year] = [];
+        }
+
+        //este último nos permite introducir el salario al objeto empresas[trabajo.empresa][trabajo.year]
+        empresas[trabajo.empresa][trabajo.year].push(trabajo.salario);
+    };
+};
+
+console.log(empresas);
