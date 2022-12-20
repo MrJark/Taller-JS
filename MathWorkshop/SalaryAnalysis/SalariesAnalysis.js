@@ -96,4 +96,35 @@ function  medianaEmpresaYear (nombreEmpresa, year) { //necesitamos los dos pará
     }
 }
 
-//Proyección de salarios de una empresa
+//Proyección de salarios de una empresa. ES muy parecido a la proyección por persona
+function proyeccionPorEmpresa (nombreEmpresa) {
+    if (!empresas[nombreEmpresa]) {
+        console.warn('Esta empresa no está en nuestra base de datos');
+    } else { //tenemos que crear un array a partir del objeto empresa donde contengan todas los datos de todos los años de los salarios y eso lo creamos a partit de ' Object.keys() Object.value() u Object.entries() y de este arreglo es del cual hay que sacar la mediana
+        const empresaYear = Object.keys(empresas[nombreEmpresa]);// el .keys me devuelve las llaves donde están en este caso los salarios, es decir, los años
+        const listaMedianaYear = empresaYear.map( (year) => { // el .map() nos crea un nuevo arreglo de lo que le digamos por cada elemento dentro del array
+            return medianaEmpresaYear(nombreEmpresa, year);// con esto lo que conseguimos es que dentro de la const empresaYear se creer por cada elemento un arreglo que me devuelva la mediana de la empresa, su nombre y el año
+        });
+        // console.log({listaMedianaYear});
+        //De aquí hacia arriba tenemos todas las medianas de los años en que la empresa 'existe'
+        //Lo siguiente es lo mismo que habíamos hecho en l aparte de proeyccionPorPersona, un ciclo for
+
+        let porcentajesCrecimiento = [];
+
+        for (let i = 1; i < listaMedianaYear.length; i++){ //i=1 porque no queremos un salto tan grande de salario, no nos daría un resultado real
+            const salarioActual = listaMedianaYear[i]; //no ponemos ningún .salario ni nada porque estamos construyendo ya a partir de un array de números, de los números que nosotros queremos
+            const salarioAnterior = listaMedianaYear[i -1];
+            const crecimientoSalarial = salarioActual - salarioAnterior;
+            const porcentajeDeCrecimiento = crecimientoSalarial/salarioAnterior;
+            porcentajesCrecimiento.push(porcentajeDeCrecimiento);
+        };
+        const medianaPorcentajesCrecimiento = AllFunctions.medianCalc(porcentajesCrecimiento);
+
+        const ultimaMediana = listaMedianaYear[listaMedianaYear.length - 1]; //este me saca la aúltima mediana de cada una de las empresas
+        const aumento = ultimaMediana * medianaPorcentajesCrecimiento;
+        const nuevaMediana = ultimaMediana + aumento;
+
+        return nuevaMediana;
+    };
+
+};
