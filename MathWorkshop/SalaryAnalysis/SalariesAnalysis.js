@@ -84,3 +84,19 @@ for (persona of salarios) { //esto es para recorrer el arreglo de salarios
 };
 
 console.log(empresas);
+
+//Mediana de salarios en un año en específico
+function  medianaEmpresaYear (nombreEmpresa, year) {
+    if (!empresas[nombreEmpresa]) {
+        console.warn('Esa empresa no está en nuestra base de datos');
+    } else if (!empresas[nombreEmpresa][year]) {
+        console.warn('La empresa no dio salarios ese año');
+    } else {
+        return AllFunctions.medianCalc(empresas[nombreEmpresa][year]);
+    }
+}
+
+//Proyección de salarios de una empresa
+function proyeccionSalarioEmpresa (nombreEmpresa) {
+    const medianaSalarios = medianaEmpresaYear(nombreEmpresa).salario
+}
