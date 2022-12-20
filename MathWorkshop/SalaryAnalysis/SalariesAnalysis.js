@@ -22,7 +22,7 @@ function medianaPorPersona(namePerson) {
 
     const medianaSalarios = AllFunctions.medianCalc(salarios);
 
-    console.log(medianaSalarios);
+    // console.log(medianaSalarios);
     return medianaSalarios;
 };
 
@@ -139,4 +139,34 @@ function medianaGeneral() {
     
     const medianaDeTodos = AllFunctions.medianCalc(listaMedianas);
     return medianaDeTodos;
+};
+
+//Análisis del top 10 y sacamos mediana
+
+function medianaTop10 () {
+    const listaMedianas = salarios.map(
+        persona => medianaPorPersona(persona.name)
+    );//con esto lo que conseguimos es que nos aparezcan las medianas clasificadas por nombre
+    
+    //lo siguiente es ordenar la lista de mayor a menor o viceversa (lo tenemos en AllFunctions)
+    
+    const medianasOrdenadas = AllFunctions.sortedList(listaMedianas);
+    
+    //lo siguiente es a esa lista ordenada de menor a mayor (porque así está puesta la función con los valores acumulados en AllFunctions) conseguir que nos de el top 10% de los que más ganan, es decir, las dos personas que más ganan
+    const cantidad = listaMedianas.length / 10;// con esto conseguimos el top 10% del length de nuestra lista
+    const limite =listaMedianas.length - cantidad; //con esta lo que conseguimos es irnos al final de la lista y devolver la cantidad de elementos que representan ese 10% en nuestra lista
+    
+    //lo siguiente es que nos devuelva esas cantidades hasta llegar al 10%, una manera visual sería:
+        /* 
+        medianasOrdenadas[limite]
+        medianasOrdenadas[limite + 1]
+        medianasOrdenadas[limite + 2]
+        medianasOrdenadas[limite + 3]
+        ...
+        */
+    //pero una forma mas sencilla para ello y más corta es con los métodos de los arrays de .slice() y .splice() Ambos hacen practicamente lo mismo y lo que hacen es permitirnos sacar del arreglo cierta cantidad de elementos para poder trabajar con ellos
+    const top10 = medianasOrdenadas.slice(limite);
+
+
+    console.log({medianasOrdenadas});
 };

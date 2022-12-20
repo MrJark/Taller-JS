@@ -69,7 +69,7 @@ AllFunctions.averageCalc = function averageCalc (list)  {
     // const sumList = list.reduce((valorAcumulado, nuevoValor) => valorAcumulado + nuevoValor);
     
     const average = sumList / list.length;
-    console.log(average);
+    // console.log(average);
     return average;
 };
 //parte para ordenar una lista desordenada
