@@ -131,10 +131,10 @@ function proyeccionPorEmpresa (nombreEmpresa) {
 
 //Análisis general
 function medianaGeneral() {
-    //tenemos que crear un arreglo de nombres de personas para a partir de esos nombres de personas, hacer llamados a la funcion medianaPorPersona para que nos de sus medianas, crear un array y a partir de ahí, hacer la mediana global
+    //tenemos que crear un arreglo de nombres de personas y a partir de esos nombres de personas, hacer llamados a la funcion medianaPorPersona para que nos de sus medianas, crear un array y a partir de ahí, hacer la mediana global
     const listaMedianas = salarios.map(
         persona => medianaPorPersona(persona.name)
-    ); //con esta llamamos a todas las personas del arreglo salarios con la propiedad .map() y hacemos a su vez que nos de la mediana por persona a través del nombre y con esto nos ahorramos la constante medianaDePersonas de abajo
+    ); //con esta llamamos a todas las personas del arreglo salarios con la propiedad .map() y hacemos que nos de por cada nanme la mediana de esa persona y con esto nos ahorramos la constante medianaDePersonas de abajo ↓
     // const medianaDePersonas = nombres.map(nombre => medianaPorPersona(nombre));
     
     const medianaDeTodos = AllFunctions.medianCalc(listaMedianas);
@@ -148,13 +148,17 @@ function medianaTop10 () {
         persona => medianaPorPersona(persona.name)
     );//con esto lo que conseguimos es que nos aparezcan las medianas clasificadas por nombre
     
-    //lo siguiente es ordenar la lista de mayor a menor o viceversa (lo tenemos en AllFunctions)
+    //lo siguiente es ordenar la lista de mayor a menor o viceversa (lo tenemos en AllFunctions) en este cao está de menor a mayor por como está estructurada la función sorted (acumulado - nuevo)
     
     const medianasOrdenadas = AllFunctions.sortedList(listaMedianas);
     
     //lo siguiente es a esa lista ordenada de menor a mayor (porque así está puesta la función con los valores acumulados en AllFunctions) conseguir que nos de el top 10% de los que más ganan, es decir, las dos personas que más ganan
-    const cantidad = listaMedianas.length / 10;// con esto conseguimos el top 10% del length de nuestra lista
-    const limite =listaMedianas.length - cantidad; //con esta lo que conseguimos es irnos al final de la lista y devolver la cantidad de elementos que representan ese 10% en nuestra lista
+
+    const cantidad = listaMedianas.length / 10;// esto representa al 10% del length
+
+    const limite =listaMedianas.length - cantidad; //con esto estamos consiguiendo restar/quitar el 90% del length a la cantidad total del length, es decir, nos quedamos solo con el 10%
+
+    //Lo siguiente que tenemos que hacer es conseguir que nos de el resultado de ese 10% y no el 90% restante
     
     //lo siguiente es que nos devuelva esas cantidades hasta llegar al 10%, una manera visual sería:
         /* 
@@ -164,9 +168,20 @@ function medianaTop10 () {
         medianasOrdenadas[limite + 3]
         ...
         */
-    //pero una forma mas sencilla para ello y más corta es con los métodos de los arrays de .slice() y .splice() Ambos hacen practicamente lo mismo y lo que hacen es permitirnos sacar del arreglo cierta cantidad de elementos para poder trabajar con ellos
-    const top10 = medianasOrdenadas.slice(limite);
+    //otra manera seria a trevés de ciclos for
+    //pero una forma mas sencilla para ello y más corta es con los métodos de los arrays de .slice() y .splice() Ambos hacen practicamente lo mismo, nos permiten sacar del arreglo cierta cantidad de elementos para poder trabajar con ellos
+    //La diferencia radica en que con .slice() cogemos los elementos que necesitemos pero no los eliminamos de la matriz madre sin embargo con .splice() cogemos esos elementos que necesitemos pero los eliminamos de la matriz madre y por tanto si tenía 20 elementos, con .splice() tendremos solo 18 y 2 en el nuevo arreglo
 
+    const top10 = medianasOrdenadas.slice(limite, medianasOrdenadas.length);
+    //los parámetros que le tenemos que introducir son 
+        //1o. Desde dónde queremos empezar a contar 
+        //2o. Hasta donde queremos que cuente
+    //Y ese rango será nuestro slice, en este caso queremos que cuente desde la posición 18 hasta la 20 que es el limite y el length total, que son los dos elementos últimos ya que están de menor a mayor
 
-    console.log({medianasOrdenadas});
+    //ahora sacamos la mediana del top 10 % 
+
+    const medianaTop10 = AllFunctions.medianCalc(top10);
+    return medianaTop10;
+    // console.log({medianaTop10, top10})
 };
+
