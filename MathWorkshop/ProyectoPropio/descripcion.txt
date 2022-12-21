@@ -1,0 +1,31 @@
+
+Proyecto porpio y caso real, es lo que hago yo con mis finanzas personales
+
+El proyeco va a consistir en una calculadora de ahorros en la cual podamos decir cuanto queremos ahorrar, en %, y hacia donde lo queremos destinar y se nos guarde y acumule en esa variable.
+Tendríamos varias variables
+
+    - Salario total
+
+    - Porcentaje destinado a gastos del día a día (70% del total)
+
+    - Porcentaje destinado a otros usos (30 % del total del salario)
+        +El 67% del 30% va para inversiones
+            Estas inversiones pueden ir desde comprar un dominio, inverti en bolsa o crypto o comprar un theme, etc.
+        +El 33%% del 30% para ahorros
+            Estos ahorros son para cubrir ciertos imprevistos 
+
+    - Gastos. El dinero que gasto y el motivo del gasto y 
+
+    - Restante. Es la resta del total del salario para gastos del día a día y lo que voy gastanto y el resultado es lo que queda para gastar
+
+    - Total sobrante una vez pasado el mes (no hay un % exacto ya que los gastos del mes pueden variar)
+        +El 20% va para las inversiones
+        +Otro 20 para la variable ahorros de imprevistos 
+        +El otro 60% va para otra variable que será a de viajes
+
+        - Viajes
+
+    - Imprevistos. Se coge de la variable gastos del día a día pero si no hay, se coge de los ahorros
+
+
+    

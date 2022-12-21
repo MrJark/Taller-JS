@@ -184,4 +184,3 @@ function medianaTop10 () {
     return medianaTop10;
     // console.log({medianaTop10, top10})
 };
-
