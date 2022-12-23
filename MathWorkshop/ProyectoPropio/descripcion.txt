@@ -14,7 +14,9 @@ Tendríamos varias variables
         +El 33%% del 30% para ahorros
             Estos ahorros son para cubrir ciertos imprevistos 
 
-    - Gastos. El dinero que gasto y el motivo del gasto y 
+    - Gastos. El dinero que gasto y el motivo del gasto
+        +Gastos fijos -> Variable constante como son membresías, hipotecas, letras del coche, etc
+        +Gastos variables -> Todos aquellos gastos que podríamos ahorrarnos como las salidas a comer, etc
 
     - Restante. Es la resta del total del salario para gastos del día a día y lo que voy gastanto y el resultado es lo que queda para gastar
 
